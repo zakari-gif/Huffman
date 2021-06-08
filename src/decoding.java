@@ -70,7 +70,7 @@ public class decoding implements Comparator<alphabet> {
 		
 	    if(node.getfilsgauche()==null  && node.Alphabet.getfilsdroit(node) == null){
 	        node.getLettre().setCodeBinaire(chemin);
-	        System.out.println("label : "+node.getLettre().getLabel()+" path : "+node.getLettre().getCodeBinaire());
+	        System.out.println("label : "+node.getLettre().getLabel()+" chemin -> "+node.getLettre().getCodeBinaire());
 	        return;
 	    }
 	    if(chemin==null){
@@ -131,10 +131,12 @@ public class decoding implements Comparator<alphabet> {
         
         if (!(fichier_frequence.isFile() && fichier_frequence.canRead())) {
             System.out.println(fichier_frequence.getName() + "ne peut pas etre lit");
+            System.out.println("Reessayez:");
             return null;
         }
         if (!fichier_frequence.exists()) {
-            System.out.println(fichier_frequence.getName() + "n'existe pas");
+            System.out.println(fichier_frequence.getName() + " n'existe pas");
+            System.out.println("Reessayez:");
             return null;
         }
         
@@ -230,6 +232,17 @@ public class decoding implements Comparator<alphabet> {
     //convertir le texte ascii en une chaîne binaire
     
     public String ascii_binaire(File file) throws IOException{
+    	if (!(file.isFile() && file.canRead())) {
+            System.out.println(file.getName() + " ne peut pas etre lit");
+            System.out.println("Reessayez:");
+            return null;
+        }
+        if (!file.exists()) {
+            System.out.println(file.getName() + " n'existe pas");
+            System.out.println("Reessayez:");
+            return null;
+       
+        }
         byte[] fichier_binaire = Files.readAllBytes(file.toPath());
         StringBuilder binaire = new StringBuilder();
         String str;
